@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(!isset($_SESSION['user'])){
-        header("Location: './pages/login.php'");
+        header("Location: pages/login.php");
     }
 ?>
 <!DOCTYPE html>
@@ -159,7 +159,7 @@
               />
             </svg>
             <a href="./pages/logout.php">
-               admin
+               Logout
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -238,7 +238,7 @@
               />
             </svg>
             <a href="./pages/logout.php">
-               admin
+               Logout
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -265,7 +265,7 @@
       </div>
 
       <div id="classes" class="tabcontent">
-        <!-- Navbar -->
+       <!-- Navbar -->
         <nav class="nav">
           <div class="hamburger" onclick="onOpen()">
             <svg
@@ -299,7 +299,7 @@
               />
             </svg>
             <a href="./pages/logout.php">
-               admin
+               Logout
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -450,7 +450,7 @@
               />
             </svg>
             <a href="./pages/logout.php">
-               admin
+               Logout
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -511,7 +511,7 @@
               />
             </svg>
             <a href="./pages/logout.php">
-               admin
+               Logout
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
