@@ -418,7 +418,8 @@ input[type="number"] {
 }
 
 /* Teacher */
-.teachers .headAdd {
+.teachers .headAdd,
+.student .headAdd {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
