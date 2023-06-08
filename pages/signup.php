@@ -1,5 +1,9 @@
-
-
+<?php 
+    session_start();
+    if(isset($_SESSION['user'])){
+        header("Location: '../index.php'");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,12 +22,12 @@
         <p>Student management System</p>
         <h1>Help Student Reach their potential.</h1>
     <?php 
-    if(isset($_POST["submit"])) {
+      if(isset($_POST["submit"])) {
         $fullName =  $_POST['fullname'];
         $email =  $_POST['email'];
         $password =  $_POST['password'];
         $repeatPassword =  $_POST['confirmPassword'];
-
+        
         $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
 
         $errors = array();
@@ -65,7 +69,7 @@
                     if($prepareStmt) {
                         mysqli_stmt_bind_param($stmt,"sss", $fullName, $email, $passwordHashed);
                         mysqli_stmt_execute($stmt);
-                        echo "<div class='success-info info'>Register Successfully <a href='./login.php'>Login</a></div>";
+                        echo "<div class='success-info info'>Register Successfully,<a href='./login.php' class='form-link'>Login</a></div>";
                     } else {
                         die("Something went wrong");
                     }
@@ -86,7 +90,7 @@
            <div class="form-group">
             <input type="password" class="form-input" placeholder="Confirm Password" name="confirmPassword" />
           </div>
-        <div class="form-group">
+            <div class="form-group">
             <a href="./login.php" class="form-link">Already has account ?</a>
             </div>
           <input type="submit" class="form-button" name="submit" value="Sign Up"></input>
