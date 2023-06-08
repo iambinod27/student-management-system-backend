@@ -51,7 +51,11 @@
           </svg>
           Dashboard
         </button>
-        <button class="tablinks" onclick="openCity(event, 'student')">
+        <button
+          class="tablinks"
+          onclick="openCity(event, 'student')"
+          id="defaultOpen"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -65,11 +69,7 @@
           </svg>
           Students
         </button>
-        <button
-          class="tablinks"
-          onclick="openCity(event, 'classes') "
-          id="defaultOpen"
-        >
+        <button class="tablinks" onclick="openCity(event, 'classes')">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -125,7 +125,6 @@
 
       <!-- dashboard -->
       <div id="dashboard" class="tabcontent">
-        <!-- Navbar -->
         <nav class="nav">
           <div class="hamburger" onclick="onOpen()">
             <svg
@@ -158,8 +157,7 @@
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
               />
             </svg>
-            <a href="./pages/logout.php">
-               Logout
+            admin
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -173,10 +171,9 @@
                 d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
               />
             </svg>
-            </a>
           </div>
         </nav>
-        <!-- Navbar -->
+
         <div class="container">
           <p class="breadcrumb">Home > Dashboard</p>
           <div class="dash-box">
@@ -237,8 +234,7 @@
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
               />
             </svg>
-            <a href="./pages/logout.php">
-               Logout
+            admin
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -252,7 +248,6 @@
                 d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
               />
             </svg>
-            </a>
           </div>
         </nav>
         <!-- Navbar -->
@@ -261,11 +256,256 @@
           <!-- breadcrumb -->
           <p class="breadcrumb">Home > Students</p>
           <!-- end of breadcrumb -->
+
+          <form class="form-dashboard">
+            <h2>Student Information</h2>
+            <div class="form-control">
+              <div class="form-d-group">
+                <label>First Name</label>
+                <input type="text" name="fname" class="form-d-input" />
+              </div>
+              <div class="form-d-group">
+                <label>Middle Name</label>
+                <input type="text" name="mname" class="form-d-input" />
+              </div>
+              <div class="form-d-group">
+                <label>Last Name</label>
+                <input type="text" name="lname" class="form-d-input" />
+              </div>
+            </div>
+            <div class="form-control">
+              <div class="form-d-group">
+                <label>Gender</label>
+                <select>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="others">others</option>
+                </select>
+              </div>
+              <div class="form-d-group">
+                <label>Date of Birth (A.D)</label>
+                <input type="date" name="date" class="form-d-input" />
+              </div>
+              <div class="form-d-group">
+                <label>Date of Birth (B.S)</label>
+                <input type="date" name="dateBs" class="form-d-input" />
+              </div>
+            </div>
+            <div class="form-control">
+              <div class="form-d-group">
+                <label>Guardian Name</label>
+                <input type="text" name="gname" class="form-d-input" />
+              </div>
+              <div class="form-d-group">
+                <label>Phone Number</label>
+                <input type="number" name="number" class="form-d-input" />
+              </div>
+            </div>
+            <div class="form-control">
+              <div class="form-d-group">
+                <label>Address</label>
+                <input type="text" name="address" class="form-d-input" />
+              </div>
+            </div>
+            <div class="form-control">
+              <div class="form-d-group">
+                <label>Class</label>
+                <input type="number" name="class" class="form-d-input" />
+              </div>
+              <div class="form-d-group">
+                <label>Section</label>
+                <input type="text" name="section" class="form-d-input" />
+              </div>
+              <div class="form-d-group">
+                <label>Roll No</label>
+                <input type="number" name="rollno" class="form-d-input" />
+              </div>
+            </div>
+
+            <div class="form-control">
+              <input type="submit" value="Save Changes" class="form-d-button" />
+            </div>
+          </form>
+
+          <div class="student">
+            <div class="headAdd">
+              <h2>All students</h2>
+              <button class="add-button">Add+</button>
+            </div>
+
+            <div class="form-control">
+              <input type="text" class="form-d-input" placeholder="Search" />
+            </div>
+            <!-- table -->
+            <!-- table -->
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">S.ID</div>
+                <div class="col col-2">Full Name</div>
+                <div class="col col-3">Gender</div>
+                <div class="col col-4">Grade</div>
+                <div class="col col-5">Section</div>
+                <div class="col col-6">Phone No.</div>
+                <div class="col col-7">Action</div>
+              </li>
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">02</div>
+                <div class="col col-2">Panna Lal</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-4">Nine</div>
+                <div class="col col-5">A</div>
+                <div class="col col-6">9803945810</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">03</div>
+                <div class="col col-2">Binod Waiba Tamang</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-4">Nine</div>
+                <div class="col col-5">A</div>
+                <div class="col col-6">9813025069</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">01</div>
+                <div class="col col-2">Dipen Shrestha</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-4">Nine</div>
+                <div class="col col-5">A</div>
+                <div class="col col-6">9849160601</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+            </ul>
+            <!-- end of table -->
+            <!-- end of table -->
+
+            <div class="pagination-container">
+              <div class="pagination">
+                <a href="#">Previous</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">Next</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div id="classes" class="tabcontent">
-       <!-- Navbar -->
+        <!-- Navbar -->
         <nav class="nav">
           <div class="hamburger" onclick="onOpen()">
             <svg
@@ -298,8 +538,7 @@
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
               />
             </svg>
-            <a href="./pages/logout.php">
-               Logout
+            admin
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -313,9 +552,9 @@
                 d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
               />
             </svg>
-            </a>
           </div>
         </nav>
+
         <!-- Navbar -->
 
         <div class="container">
@@ -323,7 +562,7 @@
           <p class="breadcrumb">Home > Classes</p>
           <!-- end of breadcrumb -->
 
-          <div>
+          <div class="classes">
             <h2>All Classes</h2>
             <div class="form-select">
               <label for="class">Select Class :</label>
@@ -337,69 +576,161 @@
               </select>
             </div>
 
-            <h4>Class :Nine</h4>
+            <h4>Class : Nine</h4>
             <p>Teacher : Pannalal BK</p>
             <p>Total : 36</p>
 
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>S.ID</th>
-                  <th>Full Name</th>
-                  <th>Gender</th>
-                  <th>Grade</th>
-                  <th>Section</th>
-                  <th>Phone No.</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Binod Waiba Tamang</td>
-                  <td>Male</td>
-                  <td>09</td>
-                  <td>A</td>
-                  <td>9849160601</td>
-                  <td>
-                    <div class="action-icon">
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-pencil-square"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                          />
-                          <path
-                            fill-rule="evenodd"
-                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-trash-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                          />
-                        </svg>
-                      </div>
+            <!-- table -->
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">S.ID</div>
+                <div class="col col-2">Full Name</div>
+                <div class="col col-3">Gender</div>
+                <div class="col col-4">Grade</div>
+                <div class="col col-5">Section</div>
+                <div class="col col-6">Phone No.</div>
+                <div class="col col-7">Action</div>
+              </li>
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">02</div>
+                <div class="col col-2">Panna Lal</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-4">Nine</div>
+                <div class="col col-5">A</div>
+                <div class="col col-6">9803945810</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">03</div>
+                <div class="col col-2">Binod Waiba Tamang</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-4">Nine</div>
+                <div class="col col-5">A</div>
+                <div class="col col-6">9813025069</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">01</div>
+                <div class="col col-2">Dipen Shrestha</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-4">Nine</div>
+                <div class="col col-5">A</div>
+                <div class="col col-6">9849160601</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+            </ul>
+            <!-- end of table -->
 
             <div class="pagination-container">
               <div class="pagination">
@@ -449,8 +780,7 @@
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
               />
             </svg>
-            <a href="./pages/logout.php">
-               Logout
+            admin
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -464,15 +794,184 @@
                 d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
               />
             </svg>
-            </a>
           </div>
         </nav>
+
         <!-- Navbar -->
 
         <div class="container">
           <!-- breadcrumb -->
           <p class="breadcrumb">Home > Teachers</p>
           <!-- end of breadcrumb -->
+
+          <div class="teachers">
+            <div class="headAdd">
+              <h2>Teacher & Staffs</h2>
+              <button class="add-button">Add+</button>
+            </div>
+
+            <div class="form-control">
+              <input type="text" class="form-d-input" placeholder="Search" />
+            </div>
+            <!-- table -->
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">S.ID</div>
+                <div class="col col-2">Full Name</div>
+                <div class="col col-3">Gender</div>
+                <div class="col col-4">Address</div>
+                <div class="col col-6">Phone No.</div>
+                <div class="col col-7">Action</div>
+              </li>
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">02</div>
+                <div class="col col-2">Panna Lal</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-5">Kapan</div>
+                <div class="col col-6">9803945810</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">02</div>
+                <div class="col col-2">Panna Lal</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-5">Kapan</div>
+                <div class="col col-6">9803945810</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">02</div>
+                <div class="col col-2">Panna Lal</div>
+                <div class="col col-3">Male</div>
+                <div class="col col-5">Kapan</div>
+                <div class="col col-6">9803945810</div>
+                <div class="col col-7">
+                  <div class="action-icon">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-pencil-square"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+            </ul>
+            <!-- end of table -->
+
+            <div class="pagination-container">
+              <div class="pagination">
+                <a href="#">Previous</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">Next</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -510,8 +1009,7 @@
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
               />
             </svg>
-            <a href="./pages/logout.php">
-               Logout
+            admin
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -525,15 +1023,150 @@
                 d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
               />
             </svg>
-            </a>
           </div>
         </nav>
+
         <!-- Navbar -->
 
         <div class="container">
           <!-- breadcrumb -->
           <p class="breadcrumb">Home > Attendance</p>
           <!-- end of breadcrumb -->
+
+          <form class="classes">
+            <h2>All Classes</h2>
+            <div class="form-select">
+              <label for="class">Select Class :</label>
+
+              <select name="class" id="One">
+                <option value="One">One</option>
+                <option value="Two">Two</option>
+                <option value="Three">Three</option>
+                <option value="Four">Four</option>
+                <option value="Five">Five</option>
+              </select>
+            </div>
+
+            <div class="attendance-head">
+              <div>
+                <h4>Class : Nine</h4>
+                <p>Teacher : Pannalal BK</p>
+                <p>Total Student : 36</p>
+              </div>
+              <div class="attendance-date">
+                <label>Date: </label>
+                <input type="date" name="aDate" class="form-d-input" />
+              </div>
+            </div>
+
+            <!-- table -->
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">S.ID</div>
+                <div class="col col-2">Full Name</div>
+                <div class="col col-3">ROll no</div>
+                <div class="col col-4 activity-col">Activity</div>
+              </li>
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">02</div>
+                <div class="col col-2">Panna Lal</div>
+                <div class="col col-3">09</div>
+                <div class="col col-4 activity-col">
+                  <div class="activity-control">
+                    <div>
+                      <input
+                        type="radio"
+                        id="activity"
+                        name="fav_language"
+                        value="Present"
+                        checked
+                      />
+                      <label for="Present">Present</label>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        id="activity"
+                        name="fav_language"
+                        value="Absent"
+                      />
+                      <label for="Absent">Absent</label>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">02</div>
+                <div class="col col-2">Panna Lal</div>
+                <div class="col col-3">09</div>
+                <div class="col col-4 activity-col">
+                  <div class="activity-control">
+                    <div>
+                      <input
+                        type="radio"
+                        id="activity"
+                        name="fav_language"
+                        value="Present"
+                        checked
+                      />
+                      <label for="Present">Present</label>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        id="activity"
+                        name="fav_language"
+                        value="Absent"
+                      />
+                      <label for="Absent">Absent</label>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+              <!-- table-list -->
+              <li class="table-row">
+                <div class="col col-1">02</div>
+                <div class="col col-2">Panna Lal</div>
+                <div class="col col-3">09</div>
+                <div class="col col-4 activity-col">
+                  <div class="activity-control">
+                    <div>
+                      <input
+                        type="radio"
+                        id="activity"
+                        name="fav_language"
+                        value="Present"
+                        checked
+                      />
+                      <label for="Present">Present</label>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        id="activity"
+                        name="fav_language"
+                        value="Absent"
+                      />
+                      <label for="Absent">Absent</label>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- end of table-list -->
+            </ul>
+            <!-- end of table -->
+
+            <input
+              name="submit"
+              type="submit"
+              value="Submit"
+              class="attendance-button"
+            />
+          </form>
         </div>
       </div>
     </main>
