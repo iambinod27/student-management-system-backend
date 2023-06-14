@@ -32,9 +32,7 @@
                 $sql = "SELECT * FROM user WHERE email = '$email'";
                 $result = mysqli_query($conn, $sql);
                 $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                // print_r($password);
-
-
+                
                 if($user) {
                     if( password_verify($password, $user["password"])){
                         session_start();
