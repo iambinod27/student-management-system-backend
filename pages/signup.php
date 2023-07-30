@@ -23,7 +23,8 @@
         <h1>Help Student Reach their potential.</h1>
     <?php 
       if(isset($_POST["submit"])) {
-        $fullName =  $_POST['fullname'];
+        $firstname =  $_POST['firstname'];
+        $lastname =  $_POST['lastname'];
         $email =  $_POST['email'];
         $password =  $_POST['password'];
         $repeatPassword =  $_POST['confirmPassword'];
@@ -32,7 +33,7 @@
 
         $errors = array();
 
-        if(empty($fullName) OR empty($email) OR empty($password) OR empty($repeatPassword)) {
+        if(empty($firstname) OR empty($lastname) OR empty($email) OR empty($password) OR empty($repeatPassword)) {
             array_push($errors, "All fields are required"); 
         }
 
@@ -49,7 +50,7 @@
                 }
                 
                 require_once "../database.php";
-                $sql = "SELECT * FROM user WHERE email = '$email'";
+                $sql = "SELECT * FROM users WHERE email = '$email'";
                 $result = mysqli_query($conn, $sql);
                 $rowCount = mysqli_num_rows($result);
                 if($rowCount > 0) {
@@ -61,13 +62,13 @@
                     foreach($errors as $error) {
                         echo "<div class='error-info info'>$error</div>";
                     }
-                } else {
+                } else {                   
                     // INSERT DATA IN DATABASE
-                    $sql = "INSERT INTO user (name, email, password) VALUES (?, ? , ?)";
+                    $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (?, ? , ?, ?)";
                     $stmt = mysqli_stmt_init($conn);
                     $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
                     if($prepareStmt) {
-                        mysqli_stmt_bind_param($stmt,"sss", $fullName, $email, $passwordHashed);
+                        mysqli_stmt_bind_param($stmt,"ssss", $firstname, $lastname, $email, $passwordHashed);
                         mysqli_stmt_execute($stmt);
                         echo "<div class='success-info info'>Register Successfully,<a href='./login.php' class='form-link'>Login</a></div>";
                     } else {
@@ -79,7 +80,10 @@
 
         <form action="signup.php" method="post">
           <div class="form-group">
-            <input type="text" class="form-input" placeholder="Full Name" name="fullname" />
+            <input type="text" class="form-input" placeholder="First Name" name="firstname" />
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Last Name" name="lastname" />
           </div>
           <div class="form-group">
             <input type="email" class="form-input" placeholder="Email" name="email" />

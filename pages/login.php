@@ -1,18 +1,7 @@
-<?php 
-  require "../table.php";
-  createDbQuery($user);
-  createDbQuery($teacher);
-  createDbQuery($subject);
-  createDbQuery($class);
-  createDbQuery($section);
-  createDbQuery($student);
-  createDbQuery($attendance);
-  createDbQuery($classStudent);
-  createDbQuery($teacherSubject);
 
-?>
 
 <?php 
+    require_once "../table.php";
     session_start();
     if(isset($_SESSION['user'])){
         header("Location: ../index.php");
@@ -43,7 +32,7 @@
                 $errors = array();
 
                 include "../database.php";
-                $sql = "SELECT * FROM user WHERE email = '$email'";
+                $sql = "SELECT * FROM users WHERE email = '$email'";
                 $result = mysqli_query($conn, $sql);
                 $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 
