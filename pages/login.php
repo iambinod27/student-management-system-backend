@@ -1,4 +1,18 @@
 <?php 
+  require "../table.php";
+  createDbQuery($user);
+  createDbQuery($teacher);
+  createDbQuery($subject);
+  createDbQuery($class);
+  createDbQuery($section);
+  createDbQuery($student);
+  createDbQuery($attendance);
+  createDbQuery($classStudent);
+  createDbQuery($teacherSubject);
+
+?>
+
+<?php 
     session_start();
     if(isset($_SESSION['user'])){
         header("Location: ../index.php");
