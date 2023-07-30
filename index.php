@@ -19,6 +19,7 @@
     <!-- Global CSS -->
     <link rel="stylesheet" href="./assets/css/global.css" />
     <link rel="stylesheet" href="./assets/css/pages/index.css" />
+    <link rel="stylesheet" href="./assets/css/components/modal.css">
   </head>
   <body>
     <main>
@@ -303,77 +304,81 @@ logout            <svg
             } 
           ?>
 
-          <form class="form-dashboard" method="post" action="index.php">
-            <h2>Student Information</h2>
-
-            <div class="form-control">
-              <div class="form-d-group">
-                <label>First Name</label>
-                <input type="text" name="fname" class="form-d-input" />
-              </div>
-              <div class="form-d-group">
-                <label>Middle Name</label>
-                <input type="text" name="mname" class="form-d-input" />
-              </div>
-              <div class="form-d-group">
-                <label>Last Name</label>
-                <input type="text" name="lname" class="form-d-input" />
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <form class="form-dashboard" method="post" action="index.php">
+                  <h2>Student Information</h2>
+      
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>First Name</label>
+                      <input type="text" name="fname" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Middle Name</label>
+                      <input type="text" name="mname" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Last Name</label>
+                      <input type="text" name="lname" class="form-d-input" />
+                    </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>Gender</label>
+                      <select name="gender"> 
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">others</option>
+                      </select>
+                    </div>
+                    <div class="form-d-group">
+                      <label>Date of Birth (A.D)</label>
+                      <input type="date" name="dob" class="form-d-input" data-date-format="YYYY-MM-DD"/>
+                    </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>Guardian Name</label>
+                      <input type="text" name="gname" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Phone Number</label>
+                      <input type="number" name="number" class="form-d-input" />
+                    </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>Address</label>
+                      <input type="text" name="address" class="form-d-input" />
+                    </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>Class</label>
+                      <input type="number" name="class" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Section</label>
+                      <input type="text" name="section" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Roll No</label>
+                      <input type="number" name="rollno" class="form-d-input" />
+                    </div>
+                  </div>
+      
+                  <div class="form-control">
+                    <input type="submit" name="submit" value="Save Changes" class="form-d-button" />
+                  </div>
+                </form>
               </div>
             </div>
-            <div class="form-control">
-              <div class="form-d-group">
-                <label>Gender</label>
-                <select name="gender"> 
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="others">others</option>
-                </select>
-              </div>
-              <div class="form-d-group">
-                <label>Date of Birth (A.D)</label>
-                <input type="date" name="dob" class="form-d-input" data-date-format="YYYY-MM-DD"/>
-              </div>
-            </div>
-            <div class="form-control">
-              <div class="form-d-group">
-                <label>Guardian Name</label>
-                <input type="text" name="gname" class="form-d-input" />
-              </div>
-              <div class="form-d-group">
-                <label>Phone Number</label>
-                <input type="number" name="number" class="form-d-input" />
-              </div>
-            </div>
-            <div class="form-control">
-              <div class="form-d-group">
-                <label>Address</label>
-                <input type="text" name="address" class="form-d-input" />
-              </div>
-            </div>
-            <div class="form-control">
-              <div class="form-d-group">
-                <label>Class</label>
-                <input type="number" name="class" class="form-d-input" />
-              </div>
-              <div class="form-d-group">
-                <label>Section</label>
-                <input type="text" name="section" class="form-d-input" />
-              </div>
-              <div class="form-d-group">
-                <label>Roll No</label>
-                <input type="number" name="rollno" class="form-d-input" />
-              </div>
-            </div>
-
-            <div class="form-control">
-              <input type="submit" name="submit" value="Save Changes" class="form-d-button" />
-            </div>
-          </form>
 
           <div class="student">
             <div class="headAdd">
               <h2>All students</h2>
-              <button class="add-button">Add+</button>
+              <button class="add-button" id="openModalBtn">Add+</button>
             </div>
 
             <div class="form-control">
@@ -1143,5 +1148,6 @@ logout            <svg
 
     <script src="./assets/js/navAndTabs.js"></script>
     <script src="./assets/js/hamburger.js"></script>
+    <script src="./assets/js/modal.js"></script>
   </body>
 </html>

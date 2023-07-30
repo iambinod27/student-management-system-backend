@@ -1,0 +1,39 @@
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Black with a semi-transparent background */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  width: 70%;
+  margin: 20px auto;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
