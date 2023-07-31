@@ -53,10 +53,14 @@ $section = "CREATE TABLE IF NOT EXISTS sections (
 
 $student = "CREATE TABLE IF NOT EXISTS students (
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
+    roll_no INT(10),
+    guardian_name VARCHAR(30),
     user_id INT(10),
     class_id INT(10),
+    section_id INT(10),
     CONSTRAINT fk_student_user FOREIGN KEY (user_id) REFERENCES users(id),
-    CONSTRAINT fk_student_class FOREIGN KEY (class_id) REFERENCES classes(id)
+    CONSTRAINT fk_student_class FOREIGN KEY (class_id) REFERENCES classes(id),
+    CONSTRAINT fk_student_section FOREIGN KEY (section_id) REFERENCES sections(id)
 );";
 
 $attendance = "CREATE TABLE IF NOT EXISTS attendance (
