@@ -279,15 +279,17 @@ logout            <svg
               $class = $_POST['class'];
               $section = $_POST['section'];
               $roll_no = $_POST['rollno'];
-              
+              $years = $_POST['years'];
               $errors = array();
 
               
               
-              $sql = "INSERT INTO students (first_name ,middle_name, last_name, gender, dob, guardian_name, phone_number, address, class, section, roll_no) VALUES ('$fname', '$mname', '$lname', '$gender', '$dob', '$gname', $number, '$address', $class, '$section', $roll_no)";
+              $sql = "INSERT INTO students (first_name ,middle_name, last_name,email, gender, address, dob, guardian_name, phone, section_id) VALUES ('$fname', '$mname', '$lname', '$email',  '$gender', '$address', '$dob', '$gname', $number,  $section)";
               echo $sql;
 
                if(mysqli_query($conn, $sql)){
+                $id=mysqli_insert_id($conn);
+                $student_sql = "INSERT INTO classStudents (class_id, student_id, years) VALUES ('$class', $id, $years)";
                    echo "<h3>data stored in a database successfully."
                 . " Please browse your localhost php my admin"
                 . " to view the updated data</h3>";
