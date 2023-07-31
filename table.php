@@ -29,7 +29,8 @@ $user = "CREATE TABLE IF NOT EXISTS users (
 
 $teacher = "CREATE TABLE IF NOT EXISTS teachers (
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
-    user_id INT(10)
+    user_id INT(10) UNIQUE,
+    CONSTRAINT fk_teacher_user FOREIGN KEY (user_id) REFERENCES users(id)
 );";
 
 $subject = "CREATE TABLE IF NOT EXISTS subjects (
@@ -46,17 +47,26 @@ $class = "CREATE TABLE IF NOT EXISTS classes (
 
 $section = "CREATE TABLE IF NOT EXISTS sections (
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
-    class_id INT(10),
-    section_name VARCHAR(50),
-    CONSTRAINT fk_section_class FOREIGN KEY (class_id) REFERENCES  classes(id)
+    section_name VARCHAR(50)
 );";
 
 $student = "CREATE TABLE IF NOT EXISTS students (
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
-    user_id INT(10),
-    class_id INT(10),
-    CONSTRAINT fk_student_user FOREIGN KEY (user_id) REFERENCES users(id),
-    CONSTRAINT fk_student_class FOREIGN KEY (class_id) REFERENCES classes(id)
+    first_name VARCHAR(30),
+    middle_name VARCHAR(30),
+    last_name VARCHAR(30),
+    email VARCHAR(50) NOT NULL UNIQUE ,
+    gender ENUM('Male', 'Female', 'Others'),
+    address VARCHAR(255),
+    phone INT(10),
+    profile_pic VARCHAR(255),
+    dob DATE,
+    roll_no INT(10),
+    guardian_name VARCHAR(30),
+    section_id INT(10),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_student_section FOREIGN KEY (section_id) REFERENCES sections(id)
 );";
 
 $attendance = "CREATE TABLE IF NOT EXISTS attendance (
