@@ -284,12 +284,10 @@ logout            <svg
 
               
               
-              $sql = "INSERT INTO students (first_name ,middle_name, last_name,email, gender, address, dob, guardian_name, phone, section_id) VALUES ('$fname', '$mname', '$lname', '$email',  '$gender', '$address', '$dob', '$gname', $number,  $section)";
+              $sql = "INSERT INTO students (first_name ,middle_name, last_name, gender, address, dob, guardian_name, phone, class_id, years, section_id, roll_no) VALUES ('$fname', '$mname', '$lname',  '$gender', '$address', '$dob', '$gname', $number, $class, '$years',  $section, $roll_no)";
               echo $sql;
 
                if(mysqli_query($conn, $sql)){
-                $id=mysqli_insert_id($conn);
-                $student_sql = "INSERT INTO classStudents (class_id, student_id, years) VALUES ('$class', $id, $years)";
                    echo "<h3>data stored in a database successfully."
                 . " Please browse your localhost php my admin"
                 . " to view the updated data</h3>";
@@ -309,6 +307,7 @@ logout            <svg
             <div id="myModal" class="modal">
               <div class="modal-content">
                 <form class="form-dashboard" method="post" action="index.php">
+                  <span class="close">&times;</span>
                   <h2>Student Information</h2>
       
                   <div class="form-control">
@@ -364,9 +363,15 @@ logout            <svg
                       <label>Section</label>
                       <input type="text" name="section" class="form-d-input" />
                     </div>
+                  </div>
+                  <div class="form-control">
                     <div class="form-d-group">
                       <label>Roll No</label>
                       <input type="number" name="rollno" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Years</label>
+                      <input type="date" name="years" class="form-d-input" data-date-format="YYYY-MM-DD"/>
                     </div>
                   </div>
       
@@ -391,7 +396,7 @@ logout            <svg
 
             <!-- table -->
             <?php 
-            require_once "./database.php";
+            require "./database.php";
             $query = 'SELECT * FROM students';
             $result = mysqli_query($conn , $query);
             ?>
@@ -414,7 +419,23 @@ logout            <svg
                   <div class="col col-1"><?php echo $row['id'] ?></div>
                   <div class="col col-2"><?php echo $row['first_name'] , " " , $row['middle_name'] , " " ,$row['last_name']; ?></div>
                   <div class="col col-3"><?php echo $row['gender']?></div>
-                  <div class="col col-4"><?php echo $row['class'] ?></div>
+                  <div class="col col-4"><?php 
+                  $GradeSql = 'SELECT grade_name FROM classes WHERE id = $row[class_id]';
+                  $ResultQuery = mysqli_query($conn , $GradeSql);
+                  
+
+                  if ($Graderow = mysqli_fetch_assoc($ResultQuery)) {
+                        // Process the data
+                        $name = $Graderow['grade_name'];
+                        // Add more fields as needed
+
+                        // Output or use the retrieved data
+                        echo "$name";
+                    } else {
+                        echo "No records found.";
+                    }
+                   
+                  ?></div>
                   <div class="col col-5"><?php echo $row["section"] ?></div>
                   <div class="col col-6"><?php echo $row['phone_number']?></div>
                   <div class="col col-7">

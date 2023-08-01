@@ -55,9 +55,10 @@ $student = "CREATE TABLE IF NOT EXISTS students (
     first_name VARCHAR(30),
     middle_name VARCHAR(30),
     last_name VARCHAR(30),
-    email VARCHAR(50) NOT NULL UNIQUE ,
     gender ENUM('Male', 'Female', 'Others'),
     address VARCHAR(255),
+    class_id INT(10),
+    years DATE,
     phone INT(10),
     profile_pic VARCHAR(255),
     dob DATE,
@@ -66,7 +67,8 @@ $student = "CREATE TABLE IF NOT EXISTS students (
     section_id INT(10),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_student_section FOREIGN KEY (section_id) REFERENCES sections(id)
+    CONSTRAINT fk_student_section FOREIGN KEY (section_id) REFERENCES sections(id),
+    CONSTRAINT fk_student_class FOREIGN KEY (class_id) REFERENCES classes(id)
 );";
 
 $attendance = "CREATE TABLE IF NOT EXISTS attendance (
@@ -81,14 +83,6 @@ $attendance = "CREATE TABLE IF NOT EXISTS attendance (
     CONSTRAINT fk_attendance_class FOREIGN KEY (class_id) REFERENCES classes(id)
 );";
 
-$classStudent = "CREATE TABLE IF NOT EXISTS classStudents (
-    class_id INT(10),
-    student_id INT(10),
-    years DATE,
-    PRIMARY KEY (class_id, student_id),
-    CONSTRAINT fk_classStudent_class FOREIGN KEY (class_id) REFERENCES classes(id),
-    CONSTRAINT fk_classStudent_student FOREIGN KEY (student_id) REFERENCES students(id)
-);";
 
 
 $teacherSubject = "CREATE TABLE IF NOT EXISTS teacherSubjects (
@@ -108,7 +102,6 @@ $teacherSubject = "CREATE TABLE IF NOT EXISTS teacherSubjects (
   createDbQuery($section);
   createDbQuery($student);
   createDbQuery($attendance);
-  createDbQuery($classStudent);
   createDbQuery($teacherSubject);
 
 
