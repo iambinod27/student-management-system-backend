@@ -284,13 +284,23 @@ logout            <svg
 
               
               
-              $sql = "INSERT INTO students (first_name ,middle_name, last_name, gender, address, dob, guardian_name, phone, class_id, years, section_id, roll_no) VALUES ('$fname', '$mname', '$lname',  '$gender', '$address', '$dob', '$gname', $number, $class, '$years',  $section, $roll_no)";
+              $sql = "INSERT INTO students (first_name ,middle_name, last_name, gender, address, dob, guardian_name, phone, section_id, roll_no) VALUES ('$fname', '$mname', '$lname',  '$gender', '$address', '$dob', '$gname', $number, $section, $roll_no)";
 
                if(mysqli_query($conn, $sql)){
+                $student = mysqli_insert_id($conn);
+                $classSql = "INSERT INTO classstudents (class_id, student_id, years) VALUES ('$class', '$student', $years)";
+                if(mysqli_query($conn, $classSql))
+                {
+                  echo "<div class='success-info info'>Class Student Records Added succesfully</div>"; 
+                } else{
+                    echo "<div class='error-info info'>ERROR: Hush! Sorry $classSql.</div>".mysqli_error($conn);
+                }
+              
                   echo "<div class='success-info info'>Student Added succesfully</div>"; 
                 } else{
                     echo "<div class='error-info info'>ERROR: Hush! Sorry $sql.</div>".mysqli_error($conn);
                 }
+                
          
 
               // Close connection
@@ -419,7 +429,14 @@ logout            <svg
             <!-- table -->
             <?php 
             require "./database.php";
-            $query = 'SELECT students.id, students.middle_name, students.last_name, students.gender, students.phone, students.first_name, classes.grade_name, sections.section_name FROM students JOIN classes ON students.class_id = classes.id JOIN sections ON students.section_id = sections.id; ';
+            $query = 'SELECT students.id, students.middle_name, students.last_name, students.gender, students.phone, students.first_name, classes.grade_name, sections.section_name FROM
+            students
+        JOIN
+            classstudents ON students.id = classstudents.student_id
+        JOIN
+            classes ON classstudents.class_id = classes.id
+        JOIN
+            sections ON students.section_id = sections.id; ';
             $result = mysqli_query($conn , $query);
             ?>
 
