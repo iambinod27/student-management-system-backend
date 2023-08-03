@@ -355,14 +355,36 @@ logout            <svg
                     </div>
                   </div>
                   <div class="form-control">
-                    <div class="form-d-group">
-                      <label>Class</label>
-                      <input type="number" name="class" class="form-d-input" />
-                    </div>
-                    <div class="form-d-group">
-                      <label>Section</label>
-                      <input type="text" name="section" class="form-d-input" />
-                    </div>
+                      <div class="form-select form-d-group">
+                        <label for="class">Class</label>
+
+                        <select name="class" id="One">
+                          <?php 
+                          require "./database.php";
+
+                          $classQuery = 'SELECT id, grade_name FROM classes';
+                          $classResult = mysqli_query($conn , $classQuery);
+
+                          while($row = mysqli_fetch_assoc($classResult)){
+                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                          }
+
+                          ?>
+                        </select>
+                      
+                      </div>
+                      <div class="form-select form-d-group">
+                          <label for="section">Section</label>
+
+                          <select name="class" id="One">
+                            <option value="One">One</option>
+                            <option value="Two">Two</option>
+                            <option value="Three">Three</option>
+                            <option value="Four">Four</option>
+                            <option value="Five">Five</option>
+                          </select>
+                        
+                        </div>
                   </div>
                   <div class="form-control">
                     <div class="form-d-group">
@@ -397,7 +419,7 @@ logout            <svg
             <!-- table -->
             <?php 
             require "./database.php";
-            $query = 'SELECT * FROM students';
+            $query = 'SELECT students.id, students.middle_name, students.last_name, students.gender, students.phone, students.first_name, classes.grade_name, sections.section_name FROM students JOIN classes ON students.class_id = classes.id JOIN sections ON students.section_id = sections.id; ';
             $result = mysqli_query($conn , $query);
             ?>
 
@@ -419,25 +441,9 @@ logout            <svg
                   <div class="col col-1"><?php echo $row['id'] ?></div>
                   <div class="col col-2"><?php echo $row['first_name'] , " " , $row['middle_name'] , " " ,$row['last_name']; ?></div>
                   <div class="col col-3"><?php echo $row['gender']?></div>
-                  <div class="col col-4"><?php 
-                  $GradeSql = 'SELECT grade_name FROM classes WHERE id = $row[class_id]';
-                  $ResultQuery = mysqli_query($conn , $GradeSql);
-                  
-
-                  if ($Graderow = mysqli_fetch_assoc($ResultQuery)) {
-                        // Process the data
-                        $name = $Graderow['grade_name'];
-                        // Add more fields as needed
-
-                        // Output or use the retrieved data
-                        echo "$name";
-                    } else {
-                        echo "No records found.";
-                    }
-                   
-                  ?></div>
-                  <div class="col col-5"><?php echo $row["section"] ?></div>
-                  <div class="col col-6"><?php echo $row['phone_number']?></div>
+                  <div class="col col-4"><?php echo $row['grade_name']?></div>
+                  <div class="col col-5"><?php echo $row['section_name']?></div>
+                  <div class="col col-6"><?php echo $row['phone']?></div>
                   <div class="col col-7">
                     <div class="action-icon">
                       <div>
