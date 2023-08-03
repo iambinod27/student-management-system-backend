@@ -40,9 +40,15 @@ $subject = "CREATE TABLE IF NOT EXISTS subjects (
 
 $class = "CREATE TABLE IF NOT EXISTS classes (
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
-    grade_name VARCHAR(30),
-    teacher_id INT(10),
-    CONSTRAINT fk_class_teacher FOREIGN KEY (teacher_id) REFERENCES teachers(id)
+    grade_name VARCHAR(30)
+);";
+
+$classTeacher = "CREATE TABLE IF NOT EXISTS classTeachers (
+     class_id INT(10),
+     teacher_id INT(10),
+     PRIMARY KEY (class_id, teacher_id),
+     CONSTRAINT fk_classTeacher_class FOREIGN KEY(class_id) REFERENCES classes(id),
+     CONSTRAINT fk_classTeacher_teacher FOREIGN KEY(teacher_id) REFERENCES teachers(id)
 );";
 
 $section = "CREATE TABLE IF NOT EXISTS sections (
@@ -103,6 +109,6 @@ $teacherSubject = "CREATE TABLE IF NOT EXISTS teacherSubjects (
   createDbQuery($student);
   createDbQuery($attendance);
   createDbQuery($teacherSubject);
-
+  createDbQuery($classTeacher);
 
 ?>
