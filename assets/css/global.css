@@ -29,3 +29,18 @@ a {
   text-decoration: none;
   color: #000;
 }
+
+.info {
+  padding: 20px 14px;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.error-info {
+  background-color: #ef5050;
+}
+
+.success-info {
+  background-color: #39a639;
+}

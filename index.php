@@ -285,17 +285,11 @@ logout            <svg
               
               
               $sql = "INSERT INTO students (first_name ,middle_name, last_name, gender, address, dob, guardian_name, phone, class_id, years, section_id, roll_no) VALUES ('$fname', '$mname', '$lname',  '$gender', '$address', '$dob', '$gname', $number, $class, '$years',  $section, $roll_no)";
-              echo $sql;
 
                if(mysqli_query($conn, $sql)){
-                   echo "<h3>data stored in a database successfully."
-                . " Please browse your localhost php my admin"
-                . " to view the updated data</h3>";
- 
-            
+                  echo "<div class='success-info info'>Student Added succesfully</div>"; 
                 } else{
-                    echo "ERROR: Hush! Sorry $sql. "
-                        . mysqli_error($conn);
+                    echo "<div class='error-info info'>ERROR: Hush! Sorry $sql.</div>".mysqli_error($conn);
                 }
          
 
@@ -305,7 +299,7 @@ logout            <svg
           ?>
 
             <div id="myModal" class="modal">
-              <div class="modal-content">
+              <div class="modal-content" id="modal-content">
                 <form class="form-dashboard" method="post" action="index.php">
                   <span class="close">&times;</span>
                   <h2>Student Information</h2>
@@ -355,14 +349,42 @@ logout            <svg
                     </div>
                   </div>
                   <div class="form-control">
-                    <div class="form-d-group">
-                      <label>Class</label>
-                      <input type="number" name="class" class="form-d-input" />
-                    </div>
-                    <div class="form-d-group">
-                      <label>Section</label>
-                      <input type="text" name="section" class="form-d-input" />
-                    </div>
+                      <div class="form-select form-d-group">
+                        <label for="class">Class</label>
+
+                        <select name="class" id="One">
+                          <?php 
+                          require "./database.php";
+
+                          $classQuery = 'SELECT id, grade_name FROM classes';
+                          $classResult = mysqli_query($conn , $classQuery);
+
+                          while($row = mysqli_fetch_assoc($classResult)){
+                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                          }
+
+                          ?>
+                        </select>
+                      
+                      </div>
+                      <div class="form-select form-d-group">
+                          <label for="section">Section</label>
+
+                          <select name="section" id="One">
+                            <?php 
+                            require "./database.php";
+
+                            $sectionQuery = 'SELECT id, section_name FROM sections';
+                            $sectionResult = mysqli_query($conn , $sectionQuery);
+
+                            while($row = mysqli_fetch_assoc($sectionResult)){
+                            echo("<option value={$row['id']}> {$row['section_name']} </option>");
+                            }
+
+                            ?>
+                          </select>
+                        
+                        </div>
                   </div>
                   <div class="form-control">
                     <div class="form-d-group">
@@ -397,7 +419,7 @@ logout            <svg
             <!-- table -->
             <?php 
             require "./database.php";
-            $query = 'SELECT * FROM students';
+            $query = 'SELECT students.id, students.middle_name, students.last_name, students.gender, students.phone, students.first_name, classes.grade_name, sections.section_name FROM students JOIN classes ON students.class_id = classes.id JOIN sections ON students.section_id = sections.id; ';
             $result = mysqli_query($conn , $query);
             ?>
 
@@ -419,28 +441,121 @@ logout            <svg
                   <div class="col col-1"><?php echo $row['id'] ?></div>
                   <div class="col col-2"><?php echo $row['first_name'] , " " , $row['middle_name'] , " " ,$row['last_name']; ?></div>
                   <div class="col col-3"><?php echo $row['gender']?></div>
-                  <div class="col col-4"><?php 
-                  $GradeSql = 'SELECT grade_name FROM classes WHERE id = $row[class_id]';
-                  $ResultQuery = mysqli_query($conn , $GradeSql);
-                  
-
-                  if ($Graderow = mysqli_fetch_assoc($ResultQuery)) {
-                        // Process the data
-                        $name = $Graderow['grade_name'];
-                        // Add more fields as needed
-
-                        // Output or use the retrieved data
-                        echo "$name";
-                    } else {
-                        echo "No records found.";
-                    }
-                   
-                  ?></div>
-                  <div class="col col-5"><?php echo $row["section"] ?></div>
-                  <div class="col col-6"><?php echo $row['phone_number']?></div>
+                  <div class="col col-4"><?php echo $row['grade_name']?></div>
+                  <div class="col col-5"><?php echo $row['section_name']?></div>
+                  <div class="col col-6"><?php echo $row['phone']?></div>
                   <div class="col col-7">
+                     <!-- Modal -->
+                     <div id="myModal" class="modal">
+                        <div class="modal-content" id="modal-content">
+                          <form class="form-dashboard" method="post" action="index.php">
+                            <span class="close">&times;</span>
+                            <h2>Student Information</h2>
+                
+                            <div class="form-control">
+                              <div class="form-d-group">
+                                <label>First Name</label>
+                                <input type="text" name="fname" class="form-d-input" />
+                              </div>
+                              <div class="form-d-group">
+                                <label>Middle Name</label>
+                                <input type="text" name="mname" class="form-d-input" />
+                              </div>
+                              <div class="form-d-group">
+                                <label>Last Name</label>
+                                <input type="text" name="lname" class="form-d-input" />
+                              </div>
+                            </div>
+                            <div class="form-control">
+                              <div class="form-d-group">
+                                <label>Gender</label>
+                                <select name="gender"> 
+                                  <option value="male">Male</option>
+                                  <option value="female">Female</option>
+                                  <option value="others">others</option>
+                                </select>
+                              </div>
+                              <div class="form-d-group">
+                                <label>Date of Birth (A.D)</label>
+                                <input type="date" name="dob" class="form-d-input" data-date-format="YYYY-MM-DD"/>
+                              </div>
+                            </div>
+                            <div class="form-control">
+                              <div class="form-d-group">
+                                <label>Guardian Name</label>
+                                <input type="text" name="gname" class="form-d-input" />
+                              </div>
+                              <div class="form-d-group">
+                                <label>Phone Number</label>
+                                <input type="number" name="number" class="form-d-input" />
+                              </div>
+                            </div>
+                            <div class="form-control">
+                              <div class="form-d-group">
+                                <label>Address</label>
+                                <input type="text" name="address" class="form-d-input" />
+                              </div>
+                            </div>
+                            <div class="form-control">
+                                <div class="form-select form-d-group">
+                                  <label for="class">Class</label>
+
+                                  <select name="class" id="One">
+                                    <?php 
+                                    require "./database.php";
+
+                                    $classQuery = 'SELECT id, grade_name FROM classes';
+                                    $classResult = mysqli_query($conn , $classQuery);
+
+                                    while($row = mysqli_fetch_assoc($classResult)){
+                                    echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                                    }
+
+                                    ?>
+                                  </select>
+                                
+                                </div>
+                                <div class="form-select form-d-group">
+                                    <label for="section">Section</label>
+
+                                    <select name="section" id="One">
+                                      <?php 
+                                      require "./database.php";
+
+                                      $sectionQuery = 'SELECT id, section_name FROM sections';
+                                      $sectionResult = mysqli_query($conn , $sectionQuery);
+
+                                      while($row = mysqli_fetch_assoc($sectionResult)){
+                                      echo("<option value={$row['id']}> {$row['section_name']} </option>");
+                                      }
+
+                                      ?>
+                                    </select>
+                                  
+                                  </div>
+                            </div>
+                            <div class="form-control">
+                              <div class="form-d-group">
+                                <label>Roll No</label>
+                                <input type="number" name="rollno" class="form-d-input" />
+                              </div>
+                              <div class="form-d-group">
+                                <label>Years</label>
+                                <input type="date" name="years" class="form-d-input" data-date-format="YYYY-MM-DD"/>
+                              </div>
+                            </div>
+                
+                            <div class="form-control">
+                              <input type="submit" name="submit" value="Save Changes" class="form-d-button" />
+                            </div>
+                          </form>
+                        </div>
+                      </div> 
+
+                     <!-- End of Modal -->
+
                     <div class="action-icon">
-                      <div>
+                      <div id="openModalBtn2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
