@@ -285,17 +285,11 @@ logout            <svg
               
               
               $sql = "INSERT INTO students (first_name ,middle_name, last_name, gender, address, dob, guardian_name, phone, class_id, years, section_id, roll_no) VALUES ('$fname', '$mname', '$lname',  '$gender', '$address', '$dob', '$gname', $number, $class, '$years',  $section, $roll_no)";
-              echo $sql;
 
                if(mysqli_query($conn, $sql)){
-                   echo "<h3>data stored in a database successfully."
-                . " Please browse your localhost php my admin"
-                . " to view the updated data</h3>";
- 
-            
+                  echo "<div class='success-info info'>Student Added succesfully</div>"; 
                 } else{
-                    echo "ERROR: Hush! Sorry $sql. "
-                        . mysqli_error($conn);
+                    echo "<div class='error-info info'>ERROR: Hush! Sorry $sql.</div>".mysqli_error($conn);
                 }
          
 
