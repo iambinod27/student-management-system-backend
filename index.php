@@ -376,12 +376,18 @@ logout            <svg
                       <div class="form-select form-d-group">
                           <label for="section">Section</label>
 
-                          <select name="class" id="One">
-                            <option value="One">One</option>
-                            <option value="Two">Two</option>
-                            <option value="Three">Three</option>
-                            <option value="Four">Four</option>
-                            <option value="Five">Five</option>
+                          <select name="section" id="One">
+                            <?php 
+                            require "./database.php";
+
+                            $sectionQuery = 'SELECT id, section_name FROM sections';
+                            $sectionResult = mysqli_query($conn , $sectionQuery);
+
+                            while($row = mysqli_fetch_assoc($sectionResult)){
+                            echo("<option value={$row['id']}> {$row['section_name']} </option>");
+                            }
+
+                            ?>
                           </select>
                         
                         </div>
