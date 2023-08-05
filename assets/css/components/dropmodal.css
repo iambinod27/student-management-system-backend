@@ -1,0 +1,66 @@
+/* The Modal (background) */
+.drop-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Black with a semi-transparent background */
+}
+
+/* Modal Content/Box */
+.drop-modal-content {
+  width: 40%;
+  margin: 15% auto;
+  max-height: 600px;
+  overflow-y: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.drop {
+  background-color: white;
+  padding: 20px;
+}
+
+.drop-btn {
+  padding: 10px 20px;
+  background-color: rgb(218, 65, 65) !important;
+  border: none;
+  border-radius: 15px;
+  color: white;
+}
+
+.dropclose {
+  display: block;
+  text-align: end;
+  font-size: 39px;
+}
+
+.drop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Close Button */
+.dropclose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.dropclose:hover,
+.dropclose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

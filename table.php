@@ -99,16 +99,24 @@ $teacherSubject = "CREATE TABLE IF NOT EXISTS teacherSubjects (
     CONSTRAINT fk_teacherSubject_subject FOREIGN KEY (subject_id) REFERENCES  subjects(id)
 );";
 
- 
+$classStudent = "CREATE TABLE IF NOT EXISTS classstudents (
+    class_id INT(10),
+    student_id INT(10),
+    years DATE,
+    PRIMARY KEY (class_id, student_id),
+    CONSTRAINT fk_classstudents_class FOREIGN KEY (class_id) REFERENCES classes(id),
+    CONSTRAINT fk_classstudents_students FOREIGN KEY (student_id) REFERENCES students(id)
+);";
   
   createDbQuery($user);
   createDbQuery($teacher);
   createDbQuery($subject);
   createDbQuery($class);
   createDbQuery($section);
-  createDbQuery($student);
+  createDbQuery($student);  
   createDbQuery($attendance);
   createDbQuery($teacherSubject);
   createDbQuery($classTeacher);
+  createDbQuery($classStudent);
 
 ?>

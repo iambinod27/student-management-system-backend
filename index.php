@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="./assets/css/global.css" />
     <link rel="stylesheet" href="./assets/css/pages/index.css" />
     <link rel="stylesheet" href="./assets/css/components/modal.css">
+    <link rel="stylesheet" href="./assets/css/components/dropmodal.css">
   </head>
   <body>
     <main>
@@ -572,7 +573,23 @@ logout            <svg
                      <!-- End of Modal -->
 
                     <div class="action-icon">
-                      <div id="openModalBtn2">
+                       <div id="dropModal" class="drop-modal">
+                        <div class="drop-modal-content" >
+                                      <div class="drop">
+                                        <span class="dropclose">&times;</span>
+                                        <div class="drop-content">
+                                          Are you sure ? you want to delete
+
+                                        <button class="drop-btn">
+                                          Confirm Delete
+                                        </button>
+                                        </div>
+                                      </div>
+
+                          
+                        </div>
+                      </div>
+                      <div >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -590,7 +607,7 @@ logout            <svg
                           />
                         </svg>
                       </div>
-                      <div>
+                      <div id="dropopenModalBtn">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -1304,5 +1321,6 @@ logout            <svg
     <script src="./assets/js/navAndTabs.js"></script>
     <script src="./assets/js/hamburger.js"></script>
     <script src="./assets/js/modal.js"></script>
+    <script src="./assets/js/dropModal.js"></script>
   </body>
 </html>
