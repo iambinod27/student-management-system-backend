@@ -457,6 +457,22 @@ logout            <svg
                     ?>
               <li class="table-row">
                   <div class="col col-1"><?php echo $row['id'] ?></div>
+                  <?php
+if(isset($_POST['deleteStudent'])) {
+    $deleteStudentId = $_POST['deleteStudent']; // Assuming you are passing the student ID via POST
+
+    // Assuming you have a database connection named $conn established
+    $deleteStudentsql = "DELETE FROM students WHERE id = $deleteStudentId"; 
+    $deleteresult = mysqli_query($conn, $deleteStudentsql);
+
+    if ($deleteresult) {
+        echo "Student deleted successfully.";
+    } else {
+        echo "Error deleting student: " . mysqli_error($conn);
+    }
+}
+?>
+
                   <div class="col col-2"><?php echo $row['first_name'] , " " , $row['middle_name'] , " " ,$row['last_name']; ?></div>
                   <div class="col col-3"><?php echo $row['gender']?></div>
                   <div class="col col-4"><?php echo $row['grade_name']?></div>
@@ -579,10 +595,15 @@ logout            <svg
                                         <span class="dropclose">&times;</span>
                                         <div class="drop-content">
                                           Are you sure ? you want to delete
-
-                                        <button class="drop-btn">
+                                       <form action='index.php' method='POST'>
+                                        <button type="submit" name="deleteStudent" class="drop-btn">
                                           Confirm Delete
                                         </button>
+                                    </form>
+                                    <?php
+                                    
+                        
+                                    ?>
                                         </div>
                                       </div>
 
