@@ -452,190 +452,53 @@ logout            <svg
                 <div class="col col-7">Action</div>
               </li>
               <!-- table-list -->
-                <?php 
-                  while($row = mysqli_fetch_assoc($result)){
-                    ?>
-              <li class="table-row">
-                  <div class="col col-1"><?php echo $row['id'] ?></div>
-                  <div class="col col-2"><?php echo $row['first_name'] , " " , $row['middle_name'] , " " ,$row['last_name']; ?></div>
-                  <div class="col col-3"><?php echo $row['gender']?></div>
-                  <div class="col col-4"><?php echo $row['grade_name']?></div>
-                  <div class="col col-5"><?php echo $row['section_name']?></div>
-                  <div class="col col-6"><?php echo $row['phone']?></div>
-                  <div class="col col-7">
-                     <!-- Modal -->
-                     <div id="myModal" class="modal">
-                        <div class="modal-content" id="modal-content">
-                          <form class="form-dashboard" method="post" action="index.php">
-                            <span class="close">&times;</span>
-                            <h2>Student Information</h2>
-                
-                            <div class="form-control">
-                              <div class="form-d-group">
-                                <label>First Name</label>
-                                <input type="text" name="fname" class="form-d-input" />
-                              </div>
-                              <div class="form-d-group">
-                                <label>Middle Name</label>
-                                <input type="text" name="mname" class="form-d-input" />
-                              </div>
-                              <div class="form-d-group">
-                                <label>Last Name</label>
-                                <input type="text" name="lname" class="form-d-input" />
-                              </div>
-                            </div>
-                            <div class="form-control">
-                              <div class="form-d-group">
-                                <label>Gender</label>
-                                <select name="gender"> 
-                                  <option value="male">Male</option>
-                                  <option value="female">Female</option>
-                                  <option value="others">others</option>
-                                </select>
-                              </div>
-                              <div class="form-d-group">
-                                <label>Date of Birth (A.D)</label>
-                                <input type="date" name="dob" class="form-d-input" data-date-format="YYYY-MM-DD"/>
-                              </div>
-                            </div>
-                            <div class="form-control">
-                              <div class="form-d-group">
-                                <label>Guardian Name</label>
-                                <input type="text" name="gname" class="form-d-input" />
-                              </div>
-                              <div class="form-d-group">
-                                <label>Phone Number</label>
-                                <input type="number" name="number" class="form-d-input" />
-                              </div>
-                            </div>
-                            <div class="form-control">
-                              <div class="form-d-group">
-                                <label>Address</label>
-                                <input type="text" name="address" class="form-d-input" />
-                              </div>
-                            </div>
-                            <div class="form-control">
-                                <div class="form-select form-d-group">
-                                  <label for="class">Class</label>
-
-                                  <select name="class" id="One">
-                                    <?php 
-                                    require "./database.php";
-
-                                    $classQuery = 'SELECT id, grade_name FROM classes';
-                                    $classResult = mysqli_query($conn , $classQuery);
-
-                                    while($row = mysqli_fetch_assoc($classResult)){
-                                    echo("<option value={$row['id']}> {$row['grade_name']} </option>");
-                                    }
-
-                                    ?>
-                                  </select>
-                                
-                                </div>
-                                <div class="form-select form-d-group">
-                                    <label for="section">Section</label>
-
-                                    <select name="section" id="One">
-                                      <?php 
-                                      require "./database.php";
-
-                                      $sectionQuery = 'SELECT id, section_name FROM sections';
-                                      $sectionResult = mysqli_query($conn , $sectionQuery);
-
-                                      while($row = mysqli_fetch_assoc($sectionResult)){
-                                      echo("<option value={$row['id']}> {$row['section_name']} </option>");
-                                      }
-
-                                      ?>
-                                    </select>
-                                  
-                                  </div>
-                            </div>
-                            <div class="form-control">
-                              <div class="form-d-group">
-                                <label>Roll No</label>
-                                <input type="number" name="rollno" class="form-d-input" />
-                              </div>
-                              <div class="form-d-group">
-                                <label>Years</label>
-                                <input type="date" name="years" class="form-d-input" data-date-format="YYYY-MM-DD"/>
-                              </div>
-                            </div>
-                
-                            <div class="form-control">
-                              <input type="submit" name="submit" value="Save Changes" class="form-d-button" />
-                            </div>
-                          </form>
-                        </div>
-                      </div> 
-
-                     <!-- End of Modal -->
-
-                    <div class="action-icon">
-                       <div id="dropModal" class="drop-modal">
-                        <div class="drop-modal-content" >
+               <?php 
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<li class="table-row">
+                        <div class="col col-1">' . $row['id'] . '</div>
+                        <div class="col col-2">' . $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'] . '</div>
+                        <div class="col col-3">' . $row['gender'] . '</div>
+                        <div class="col col-4">' . $row['grade_name'] . '</div>
+                        <div class="col col-5">' . $row['section_name'] . '</div>
+                        <div class="col col-6">' . $row['phone'] . '</div>
+                        <div class="col col-7">
+                            <div class="action-icon">
+                                <div class="drop-modal" id="dropModal-' . $row['id'] . '">
+                                  <div class="drop-modal-content">
                                       <div class="drop">
-                                        <span class="dropclose">&times;</span>
-                                        <div class="drop-content">
-                                          Are you sure ? you want to delete
-
-                                        <button class="drop-btn">
-                                          Confirm Delete
-                                        </button>
-                                        </div>
+                                          <span class="dropclose" onclick="closeDropModal(' . $row['id'] . ')">&times;</span>
+                                          <div class="drop-content">
+                                              Are you sure? You want to delete
+                                              <button class="drop-btn" onclick="confirmDelete(' . $row['id'] . ')">
+                                                  Confirm Delete
+                                              </button>
+                                          </div>
                                       </div>
-
-                          
+                                  </div>
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                </div>
+                                <div id="dropopenModalBtn" onclick="openDropModal('. $row['id'] .')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-pencil-square"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                          />
-                          <path
-                            fill-rule="evenodd"
-                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                          />
-                        </svg>
-                      </div>
-                      <div id="dropopenModalBtn">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-trash-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-              </li>
-                    <?php
-                   
-                  }
+                    </li>';
+                }
                 ?>
-              
-             
+
             </ul>
             <!-- end of table -->
             <!-- end of table -->
 
             <div class="pagination-container">
-              <div class="pagination">
+              <div class="pagination" >
                 <a href="#">Previous</a>
                 <a href="#" class="active">1</a>
                 <a href="#">2</a>
