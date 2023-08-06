@@ -452,9 +452,27 @@ logout            <svg
                 <div class="col col-7">Action</div>
               </li>
               <!-- table-list -->
-               <?php 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<li class="table-row">
+              <?php 
+              // Delete PHP Code 
+         if(isset($_POST['deleteStudent'])) {
+           
+           if (isset($_GET['studentDelId'])) {
+               $studentDelId = $_GET['studentDelId'];
+               $deleteStudentSQL = "DELETE FROM students WHERE id = $studentDelId";
+               $deleteStudentResult = mysqli_query($conn , $deleteStudentSQL);
+
+               echo "delete Successfully";
+           } else {
+               echo "Missing studentDelId parameter. ";
+           }
+         }
+         // Delete PHP Code
+               
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+
+
+                        echo '<li class="table-row">
                         <div class="col col-1">' . $row['id'] . '</div>
                         <div class="col col-2">' . $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'] . '</div>
                         <div class="col col-3">' . $row['gender'] . '</div>
@@ -467,12 +485,12 @@ logout            <svg
                                   <div class="drop-modal-content">
                                       <div class="drop">
                                           <span class="dropclose" onclick="closeDropModal(' . $row['id'] . ')">&times;</span>
-                                          <div class="drop-content">
+                                          <form action="index.php?studentDelId='.$row['id'].'" method="POST" class="drop-content">
                                               Are you sure? You want to delete
-                                              <button class="drop-btn" onclick="confirmDelete(' . $row['id'] . ')">
+                                              <button name="deleteStudent" class="drop-btn" onclick="confirmDelete(' . $row['id'] . ')">
                                                   Confirm Delete
                                               </button>
-                                          </div>
+                                          </form>
                                       </div>
                                   </div>
                                 </div>
@@ -490,7 +508,9 @@ logout            <svg
                             </div>
                         </div>
                     </li>';
-                }
+                    }
+
+
                 ?>
 
             </ul>
