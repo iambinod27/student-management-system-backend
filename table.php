@@ -30,7 +30,7 @@ $user = "CREATE TABLE IF NOT EXISTS users (
 $teacher = "CREATE TABLE IF NOT EXISTS teachers (
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
     user_id INT(10) UNIQUE,
-    CONSTRAINT fk_teacher_user FOREIGN KEY (user_id) REFERENCES users(id)
+    CONSTRAINT fk_teacher_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );";
 
 $subject = "CREATE TABLE IF NOT EXISTS subjects (
@@ -47,8 +47,8 @@ $classTeacher = "CREATE TABLE IF NOT EXISTS classTeachers (
      class_id INT(10),
      teacher_id INT(10),
      PRIMARY KEY (class_id, teacher_id),
-     CONSTRAINT fk_classTeacher_class FOREIGN KEY(class_id) REFERENCES classes(id),
-     CONSTRAINT fk_classTeacher_teacher FOREIGN KEY(teacher_id) REFERENCES teachers(id)
+     CONSTRAINT fk_classTeacher_class FOREIGN KEY(class_id) REFERENCES classes(id) ON DELETE CASCADE,
+     CONSTRAINT fk_classTeacher_teacher FOREIGN KEY(teacher_id) REFERENCES teachers(id) ON DELETE CASCADE
 );";
 
 $section = "CREATE TABLE IF NOT EXISTS sections (
@@ -73,8 +73,8 @@ $student = "CREATE TABLE IF NOT EXISTS students (
     section_id INT(10),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_student_section FOREIGN KEY (section_id) REFERENCES sections(id),
-    CONSTRAINT fk_student_class FOREIGN KEY (class_id) REFERENCES classes(id)
+    CONSTRAINT fk_student_section FOREIGN KEY (section_id) REFERENCES sections(id) ON DELETE CASCADE,
+    CONSTRAINT fk_student_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE
 );";
 
 $attendance = "CREATE TABLE IF NOT EXISTS attendance (
@@ -84,9 +84,9 @@ $attendance = "CREATE TABLE IF NOT EXISTS attendance (
     teacher_id INT(10),
     date DATE,
     class_id INT(10),
-    CONSTRAINT fk_attendance_student FOREIGN KEY (student_id) REFERENCES students(id),
-    CONSTRAINT fk_attendance_teacher FOREIGN KEY (teacher_id) REFERENCES teachers(id),
-    CONSTRAINT fk_attendance_class FOREIGN KEY (class_id) REFERENCES classes(id)
+    CONSTRAINT fk_attendance_student FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+    CONSTRAINT fk_attendance_teacher FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE CASCADE,
+    CONSTRAINT fk_attendance_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE
 );";
 
 
@@ -95,8 +95,8 @@ $teacherSubject = "CREATE TABLE IF NOT EXISTS teacherSubjects (
     teacher_id INT(10),
     subject_id INT(10),
     PRIMARY KEY (teacher_id, subject_id),
-    CONSTRAINT fk_teacherSubject_teacher FOREIGN KEY (teacher_id) REFERENCES teachers(id),
-    CONSTRAINT fk_teacherSubject_subject FOREIGN KEY (subject_id) REFERENCES  subjects(id)
+    CONSTRAINT fk_teacherSubject_teacher FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE CASCADE,
+    CONSTRAINT fk_teacherSubject_subject FOREIGN KEY (subject_id) REFERENCES  subjects(id) ON DELETE CASCADE
 );";
 
 $classStudent = "CREATE TABLE IF NOT EXISTS classstudents (
@@ -104,8 +104,8 @@ $classStudent = "CREATE TABLE IF NOT EXISTS classstudents (
     student_id INT(10),
     years DATE,
     PRIMARY KEY (class_id, student_id),
-    CONSTRAINT fk_classstudents_class FOREIGN KEY (class_id) REFERENCES classes(id),
-    CONSTRAINT fk_classstudents_students FOREIGN KEY (student_id) REFERENCES students(id)
+    CONSTRAINT fk_classstudents_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE,
+    CONSTRAINT fk_classstudents_students FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );";
   
   createDbQuery($user);
