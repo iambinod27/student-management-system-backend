@@ -852,6 +852,22 @@ logout            <svg
                 <div class="col col-6">Phone No.</div>
                 <div class="col col-7">Action</div>
               </li>
+              <?php
+              $teacherSql = "SELECT id, u.first_name, u.middle_name, u.last_name, u.gender, u.address, u.phone FROM teachers JOIN
+              users as u ON teachers.user_id = user.id;";
+              $teacherresult = mysqli_query($conn , $teacherSql);
+            while ($row = mysqli_fetch_assoc($teacherresult)) {
+             echo '<li class="table-row">
+              <div class="col col-1">' . $row['id'] . '</div>
+              <div class="col col-2">' . $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'] . '</div>
+              <div class="col col-3">' . $row['gender'] . '</div>
+              <div class="col col-4">' . $row['address'] . '</div>
+              <div class="col col-6">' . $row['phone'] . '</div> 
+              <div class="col col-7"> </div>
+              </li> 
+              ' ; 
+            }
+              ?>
               <!-- table-list -->
               <li class="table-row">
                 <div class="col col-1">02</div>
