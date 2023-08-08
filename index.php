@@ -853,8 +853,8 @@ logout            <svg
                 <div class="col col-7">Action</div>
               </li>
               <?php
-              $teacherSql = "SELECT id, u.first_name, u.middle_name, u.last_name, u.gender, u.address, u.phone FROM teachers JOIN
-              users as u ON teachers.user_id = user.id;";
+              $teacherSql = "SELECT t.id, u.first_name, u.middle_name, u.last_name, u.gender, u.address, u.phone FROM teachers as t JOIN
+              users as u ON t.user_id = u.id;";
               $teacherresult = mysqli_query($conn , $teacherSql);
             while ($row = mysqli_fetch_assoc($teacherresult)) {
              echo '<li class="table-row">
