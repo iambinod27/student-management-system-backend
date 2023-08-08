@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./assets/css/pages/index.css" />
     <link rel="stylesheet" href="./assets/css/components/modal.css">
     <link rel="stylesheet" href="./assets/css/components/dropmodal.css">
+    <link rel="stylesheet" href="./assets/css/components/teachersmodal.css">
   </head>
   <body>
     <main>
@@ -834,9 +835,114 @@ logout            <svg
           <!-- end of breadcrumb -->
 
           <div class="teachers">
+          <div id="teachers-Modal" class="teachers-modal">
+              <div class="teachers-modal-content" id="teachers-modal-content">
+                <form class="form-dashboard" method="post" action="index.php">
+                  <span class="teachers-close">&times;</span>
+                  <h2>Student Information</h2>
+      
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>First Name</label>
+                      <input type="text" name="fname" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Middle Name</label>
+                      <input type="text" name="mname" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Last Name</label>
+                      <input type="text" name="lname" class="form-d-input" />
+                    </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>Gender</label>
+                      <select name="gender"> 
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">others</option>
+                      </select>
+                    </div>
+                    <div class="form-d-group">
+                      <label>Date of Birth (A.D)</label>
+                      <input type="date" name="dob" class="form-d-input" data-date-format="YYYY-MM-DD"/>
+                    </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>Guardian Name</label>
+                      <input type="text" name="gname" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Phone Number</label>
+                      <input type="number" name="number" class="form-d-input" />
+                    </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>Address</label>
+                      <input type="text" name="address" class="form-d-input" />
+                    </div>
+                  </div>
+                  <div class="form-control">
+                      <div class="form-select form-d-group">
+                        <label for="class">Class</label>
+
+                        <select name="class" id="One">
+                          <?php 
+                          require "./database.php";
+
+                          $classQuery = 'SELECT id, grade_name FROM classes';
+                          $classResult = mysqli_query($conn , $classQuery);
+
+                          while($row = mysqli_fetch_assoc($classResult)){
+                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                          }
+
+                          ?>
+                        </select>
+                      
+                      </div>
+                      <div class="form-select form-d-group">
+                          <label for="section">Section</label>
+
+                          <select name="section" id="One">
+                            <?php 
+                            require "./database.php";
+
+                            $sectionQuery = 'SELECT id, section_name FROM sections';
+                            $sectionResult = mysqli_query($conn , $sectionQuery);
+
+                            while($row = mysqli_fetch_assoc($sectionResult)){
+                            echo("<option value={$row['id']}> {$row['section_name']} </option>");
+                            }
+
+                            ?>
+                          </select>
+                        
+                        </div>
+                  </div>
+                  <div class="form-control">
+                    <div class="form-d-group">
+                      <label>Roll No</label>
+                      <input type="number" name="rollno" class="form-d-input" />
+                    </div>
+                    <div class="form-d-group">
+                      <label>Years</label>
+                      <input type="date" name="years" class="form-d-input" data-date-format="YYYY-MM-DD"/>
+                    </div>
+                  </div>
+      
+                  <div class="form-control">
+                    <input type="submit" name="submit" value="Save Changes" class="form-d-button" />
+                  </div>
+                </form>
+              </div>
+            </div>
             <div class="headAdd">
               <h2>Teacher & Staffs</h2>
-              <button class="add-button">Add+</button>
+              <button class="add-button" id="openTeachersModal">Add+</button>
             </div>
 
             <div class="form-control">
@@ -1221,5 +1327,6 @@ logout            <svg
     <script src="./assets/js/hamburger.js"></script>
     <script src="./assets/js/modal.js"></script>
     <script src="./assets/js/dropModal.js"></script>
+    <script src="./assets/js/teachersModal.js"></script>
   </body>
 </html>
