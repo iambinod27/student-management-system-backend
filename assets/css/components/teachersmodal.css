@@ -1,0 +1,41 @@
+/* The Modal (background) */
+.teachers-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(
+      0,
+      0,
+      0,
+      0.5
+    ); /* Black with a semi-transparent background */
+  }
+  
+  /* Modal Content/Box */
+  .teachers-modal-content {
+    width: 70%;
+    margin: 20px auto;
+    max-height: 600px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Close Button */
+  .teachers-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .teachers-close:hover,
+  .teachers-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
