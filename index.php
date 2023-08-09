@@ -839,7 +839,7 @@ logout            <svg
               <div class="teachers-modal-content" id="teachers-modal-content">
                 <form class="form-dashboard" method="post" action="index.php">
                   <span class="teachers-close">&times;</span>
-                  <h2>Student Information</h2>
+                  <h2>Teacher Information</h2>
       
                   <div class="form-control">
                     <div class="form-d-group">
@@ -870,10 +870,7 @@ logout            <svg
                     </div>
                   </div>
                   <div class="form-control">
-                    <div class="form-d-group">
-                      <label>Guardian Name</label>
-                      <input type="text" name="gname" class="form-d-input" />
-                    </div>
+                   
                     <div class="form-d-group">
                       <label>Phone Number</label>
                       <input type="number" name="number" class="form-d-input" />
@@ -881,56 +878,21 @@ logout            <svg
                   </div>
                   <div class="form-control">
                     <div class="form-d-group">
-                      <label>Address</label>
+                      <label>Email</label>
                       <input type="text" name="address" class="form-d-input" />
                     </div>
                   </div>
                   <div class="form-control">
-                      <div class="form-select form-d-group">
-                        <label for="class">Class</label>
-
-                        <select name="class" id="One">
-                          <?php 
-                          require "./database.php";
-
-                          $classQuery = 'SELECT id, grade_name FROM classes';
-                          $classResult = mysqli_query($conn , $classQuery);
-
-                          while($row = mysqli_fetch_assoc($classResult)){
-                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
-                          }
-
-                          ?>
-                        </select>
-                      
-                      </div>
-                      <div class="form-select form-d-group">
-                          <label for="section">Section</label>
-
-                          <select name="section" id="One">
-                            <?php 
-                            require "./database.php";
-
-                            $sectionQuery = 'SELECT id, section_name FROM sections';
-                            $sectionResult = mysqli_query($conn , $sectionQuery);
-
-                            while($row = mysqli_fetch_assoc($sectionResult)){
-                            echo("<option value={$row['id']}> {$row['section_name']} </option>");
-                            }
-
-                            ?>
-                          </select>
+                      <div class="form-d-group">
+                      <label>Address</label>
+                      <input type="text" name="address" class="form-d-input" />
+                    </div>
                         
-                        </div>
                   </div>
                   <div class="form-control">
                     <div class="form-d-group">
-                      <label>Roll No</label>
-                      <input type="number" name="rollno" class="form-d-input" />
-                    </div>
-                    <div class="form-d-group">
-                      <label>Years</label>
-                      <input type="date" name="years" class="form-d-input" data-date-format="YYYY-MM-DD"/>
+                      <label>Subjects</label>
+                      <input type="text" name="address" class="form-d-input" />
                     </div>
                   </div>
       
