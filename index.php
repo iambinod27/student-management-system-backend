@@ -593,17 +593,27 @@ logout            <svg
 
           <div class="classes">
             <h2>All Classes</h2>
-            <div class="form-select">
+            <form class="form-select">
               <label for="class">Select Class :</label>
 
               <select name="class" id="One">
-                <option value="One">One</option>
-                <option value="Two">Two</option>
-                <option value="Three">Three</option>
-                <option value="Four">Four</option>
-                <option value="Five">Five</option>
-              </select>
-            </div>
+              <?php 
+                          require "./database.php";
+
+                          $classQuery = 'SELECT id, grade_name FROM classes';
+                          $classResult = mysqli_query($conn , $classQuery);
+
+                          while($row = mysqli_fetch_assoc($classResult)){
+                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                          }
+
+                          ?>
+              </select>           
+              <button type = "submit" name = "submit" value = "filter">               
+          </button>
+        
+
+                        </form>
 
             <h4>Class : Nine</h4>
             <p>Teacher : Pannalal BK</p>
@@ -892,7 +902,7 @@ logout            <svg
                   <div class="form-control">
                     <div class="form-d-group">
                       <label>Subjects</label>
-                      <input type="text" name="address" class="form-d-input" />
+                      <input type="text" name="subjects" class="form-d-input" />
                     </div>
                   </div>
       
@@ -1087,19 +1097,29 @@ logout            <svg
           <p class="breadcrumb">Home > Attendance</p>
           <!-- end of breadcrumb -->
 
-          <form class="classes">
+          <div class="classes">
             <h2>All Classes</h2>
-            <div class="form-select">
+            <form class="form-select">
               <label for="class">Select Class :</label>
 
               <select name="class" id="One">
-                <option value="One">One</option>
-                <option value="Two">Two</option>
-                <option value="Three">Three</option>
-                <option value="Four">Four</option>
-                <option value="Five">Five</option>
-              </select>
-            </div>
+              <?php 
+                          require "./database.php";
+
+                          $classQuery = 'SELECT id, grade_name FROM classes';
+                          $classResult = mysqli_query($conn , $classQuery);
+
+                          while($row = mysqli_fetch_assoc($classResult)){
+                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                          }
+
+                          ?>
+              </select>           
+              <button type = "submit" name = "submit" value = "filter">               
+          </button>
+        
+
+                        </form>
 
             <div class="attendance-head">
               <div>
