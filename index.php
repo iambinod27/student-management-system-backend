@@ -593,17 +593,27 @@ logout            <svg
 
           <div class="classes">
             <h2>All Classes</h2>
-            <div class="form-select">
+            <form class="form-select">
               <label for="class">Select Class :</label>
 
               <select name="class" id="One">
-                <option value="One">One</option>
-                <option value="Two">Two</option>
-                <option value="Three">Three</option>
-                <option value="Four">Four</option>
-                <option value="Five">Five</option>
-              </select>
-            </div>
+              <?php 
+                          require "./database.php";
+
+                          $classQuery = 'SELECT id, grade_name FROM classes';
+                          $classResult = mysqli_query($conn , $classQuery);
+
+                          while($row = mysqli_fetch_assoc($classResult)){
+                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                          }
+
+                          ?>
+              </select>           
+              <button type = "submit" name = "submit" value = "filter">               
+          </button>
+        
+
+                        </form>
 
             <h4>Class : Nine</h4>
             <p>Teacher : Pannalal BK</p>
@@ -879,7 +889,7 @@ logout            <svg
                   <div class="form-control">
                     <div class="form-d-group">
                       <label>Email</label>
-                      <input type="text" name="address" class="form-d-input" />
+                      <input type="email" name="email" class="form-d-input" />
                     </div>
                   </div>
                   <div class="form-control">
@@ -892,17 +902,51 @@ logout            <svg
                   <div class="form-control">
                     <div class="form-d-group">
                       <label>Subjects</label>
-                      <input type="text" name="address" class="form-d-input" />
+                      <input type="text" name="subjects" class="form-d-input" />
                     </div>
                   </div>
       
                   <div class="form-control">
-                    <input type="submit" name="submit" value="Save Changes" class="form-d-button" />
+                    <input type="submit" name="teachersubmit" value="Save Changes" class="form-d-button" />
                   </div>
                 </form>
               </div>
             </div>
+            <?php
+            require_once "./database.php";
+            if(isset($_POST['teachersubmit'])) {
+              $fname = $_POST['fname'];
+              $mname = $_POST['mname'];
+              $lname = $_POST['lname'];
+              $gender = $_POST['gender'];
+              $dob = $_POST['dob'];
+              $number = $_POST['number'];
+              $address = $_POST['address'];
+              $email = $_POST['email'];
+              $errors = array();
+
+              
+              
+              $usersql = "INSERT INTO users(first_name ,middle_name, last_name, gender, address, dob, phone, email, password) VALUES ('$fname', '$mname', '$lname',  '$gender', '$address', '$dob',  $number, '$email', '$dob')";
+
+               if(mysqli_query($conn, $usersql)){
+                $user_id = mysqli_insert_id($conn);
+                $teacherSql = "INSERT INTO teachers (user_id) VALUES ($user_id)";
+                if(mysqli_query($conn, $teacherSql))
+                {
+                  echo "<div class='success-info info'>Teachers Records Added succesfully</div>"; 
+                } else{
+                    echo "<div class='error-info info'>ERROR: Hush! Sorry $teachersql.</div>".mysqli_error($conn);
+                }
+              
+               }
+              }
+              
+            
+            ?>
+
             <div class="headAdd">
+
               <h2>Teacher & Staffs</h2>
               <button class="add-button" id="openTeachersModal">Add+</button>
             </div>
@@ -921,6 +965,7 @@ logout            <svg
                 <div class="col col-7">Action</div>
               </li>
               <?php
+          
               $teacherSql = "SELECT t.id, u.first_name, u.middle_name, u.last_name, u.gender, u.address, u.phone FROM teachers as t JOIN
               users as u ON t.user_id = u.id;";
               $teacherresult = mysqli_query($conn , $teacherSql);
@@ -931,145 +976,50 @@ logout            <svg
               <div class="col col-3">' . $row['gender'] . '</div>
               <div class="col col-4">' . $row['address'] . '</div>
               <div class="col col-6">' . $row['phone'] . '</div> 
-              <div class="col col-7"> </div>
+              <div class="col col-7"> 
+              <div class="action-icon">
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-pencil-square"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-trash-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+               </div>
               </li> 
               ' ; 
             }
               ?>
               <!-- table-list -->
-              <li class="table-row">
-                <div class="col col-1">02</div>
-                <div class="col col-2">Panna Lal</div>
-                <div class="col col-3">Male</div>
-                <div class="col col-5">Kapan</div>
-                <div class="col col-6">9803945810</div>
-                <div class="col col-7">
-                  <div class="action-icon">
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-pencil-square"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </li>
+              
               <!-- end of table-list -->
               <!-- table-list -->
-              <li class="table-row">
-                <div class="col col-1">02</div>
-                <div class="col col-2">Panna Lal</div>
-                <div class="col col-3">Male</div>
-                <div class="col col-5">Kapan</div>
-                <div class="col col-6">9803945810</div>
-                <div class="col col-7">
-                  <div class="action-icon">
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-pencil-square"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <!-- end of table-list -->
-              <!-- table-list -->
-              <li class="table-row">
-                <div class="col col-1">02</div>
-                <div class="col col-2">Panna Lal</div>
-                <div class="col col-3">Male</div>
-                <div class="col col-5">Kapan</div>
-                <div class="col col-6">9803945810</div>
-                <div class="col col-7">
-                  <div class="action-icon">
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-pencil-square"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </li>
               <!-- end of table-list -->
             </ul>
             <!-- end of table -->
@@ -1147,19 +1097,29 @@ logout            <svg
           <p class="breadcrumb">Home > Attendance</p>
           <!-- end of breadcrumb -->
 
-          <form class="classes">
+          <div class="classes">
             <h2>All Classes</h2>
-            <div class="form-select">
+            <form class="form-select">
               <label for="class">Select Class :</label>
 
               <select name="class" id="One">
-                <option value="One">One</option>
-                <option value="Two">Two</option>
-                <option value="Three">Three</option>
-                <option value="Four">Four</option>
-                <option value="Five">Five</option>
-              </select>
-            </div>
+              <?php 
+                          require "./database.php";
+
+                          $classQuery = 'SELECT id, grade_name FROM classes';
+                          $classResult = mysqli_query($conn , $classQuery);
+
+                          while($row = mysqli_fetch_assoc($classResult)){
+                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                          }
+
+                          ?>
+              </select>           
+              <button type = "submit" name = "submit" value = "filter">               
+          </button>
+        
+
+                        </form>
 
             <div class="attendance-head">
               <div>
