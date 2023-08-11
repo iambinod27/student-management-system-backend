@@ -620,6 +620,7 @@ logout            <svg
                 </select>           
               <input type="submit" name="csubmit" value="Apply">
             </form>
+            
 
              <h4>Class : Nine</h4>
                   <p>Teacher : Pannalal BK</p>
@@ -663,17 +664,18 @@ logout            <svg
                 
 
                 while($classRow = mysqli_fetch_assoc($classResult)) {
-                  echo(`
+                  echo (
+                    '
                     <li class="table-row">
-                      <div class="col col-1">{$classRow['student_id']}</div>
-                      <div class="col col-2">{$classRow['first_name']  $classRow['middle_name'] $classRow['last_name']  }</div>
-                      <div class="col col-3">{$classRow['gender']}</div>
-                      <div class="col col-5">{$classRow['section_name']}</div>
-                      <div class="col col-6">{$classRow['phone']}</div>
+                      <div class="col col-1">' . $classRow['student_id'] . '</div>
+                      <div class="col col-2">' . $classRow['first_name'] . ' ' . $classRow['middle_name']. ' '. $classRow['last_name'].' </div>
+                      <div class="col col-3">' . $classRow['gender'] . '</div>
+                      <div class="col col-5">' .$classRow['section_name'] . '</div>
+                      <div class="col col-6">' .$classRow['phone'] . '</div>
                     </li>
                     <!-- end of table-list -->
-                   
-                    `);
+                    '
+                  );
                   }
                 }
                 ?>
