@@ -61,7 +61,7 @@
         <button
           class="tablinks"
           onclick="openCity(event, 'student')"
-          id="defaultOpen"
+          
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@
           </svg>
           Students
         </button>
-        <button class="tablinks" onclick="openCity(event, 'classes')">
+        <button class="tablinks" onclick="openCity(event, 'classes')" id="defaultOpen">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -433,13 +433,15 @@ logout            <svg
             require "./database.php";
             $query = 'SELECT students.id, students.middle_name, students.last_name, students.gender, students.phone, students.first_name, classes.grade_name, sections.section_name FROM
             students
-        JOIN
-            classstudents ON students.id = classstudents.student_id
-        JOIN
-            classes ON classstudents.class_id = classes.id
-        JOIN
-            sections ON students.section_id = sections.id; ';
-            $result = mysqli_query($conn , $query);
+            JOIN
+                classstudents ON students.id = classstudents.student_id
+            JOIN
+                classes ON classstudents.class_id = classes.id
+            JOIN
+                sections ON students.section_id = sections.id; ';
+            
+          $result = mysqli_query($conn , $query);
+
             ?>
 
             <ul class="responsive-table">
@@ -593,194 +595,94 @@ logout            <svg
 
           <div class="classes">
             <h2>All Classes</h2>
-            <form class="form-select">
+            <?php 
+            
+
+            ?>
+
+
+            <form class="form-select" method="post" action="index.php">
               <label for="class">Select Class :</label>
-
-              <select name="class" id="One">
+              
+              <select name='selectClass' >
               <?php 
-                          require "./database.php";
+                require "./database.php";
+                
+                $classQuery = 'SELECT id, grade_name FROM classes';
+                $classResult = mysqli_query($conn , $classQuery);
+                
+                while($row = mysqli_fetch_assoc($classResult)){
+                  echo("
+                  <option value={$row['id']} > {$row['grade_name']} </option>
+                  ");
+                }
+                ?>
+                </select>           
+              <input type="submit" name="csubmit" value="Apply">
+            </form>
+            
 
-                          $classQuery = 'SELECT id, grade_name FROM classes';
-                          $classResult = mysqli_query($conn , $classQuery);
-
-                          while($row = mysqli_fetch_assoc($classResult)){
-                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
-                          }
-
-                          ?>
-              </select>           
-              <button type = "submit" name = "submit" value = "filter">               
-          </button>
+             <h4>Class : Nine</h4>
+                  <p>Teacher : Pannalal BK</p>
+                  <p>Total : 36</p>
         
+                  <!-- table -->
+                  <ul class="responsive-table">
+                    <li class="table-header">
+                      <div class="col col-1">S.ID</div>
+                      <div class="col col-2">Full Name</div>
+                      <div class="col col-3">Gender</div>
+                      <div class="col col-5">Section</div>
+                      <div class="col col-6">Phone No.</div>
+                    </li>
+                    <!-- table-list -->
+                   
 
-                        </form>
+            <?php 
 
-            <h4>Class : Nine</h4>
-            <p>Teacher : Pannalal BK</p>
-            <p>Total : 36</p>
+              if(isset($_POST['csubmit'])) {
+                $Selectedclass = $_POST['selectClass'];
 
-            <!-- table -->
-            <ul class="responsive-table">
-              <li class="table-header">
-                <div class="col col-1">S.ID</div>
-                <div class="col col-2">Full Name</div>
-                <div class="col col-3">Gender</div>
-                <div class="col col-4">Grade</div>
-                <div class="col col-5">Section</div>
-                <div class="col col-6">Phone No.</div>
-                <div class="col col-7">Action</div>
-              </li>
-              <!-- table-list -->
-              <li class="table-row">
-                <div class="col col-1">02</div>
-                <div class="col col-2">Panna Lal</div>
-                <div class="col col-3">Male</div>
-                <div class="col col-4">Nine</div>
-                <div class="col col-5">A</div>
-                <div class="col col-6">9803945810</div>
-                <div class="col col-7">
-                  <div class="action-icon">
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-pencil-square"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <!-- end of table-list -->
-              <!-- table-list -->
-              <li class="table-row">
-                <div class="col col-1">03</div>
-                <div class="col col-2">Binod Waiba Tamang</div>
-                <div class="col col-3">Male</div>
-                <div class="col col-4">Nine</div>
-                <div class="col col-5">A</div>
-                <div class="col col-6">9813025069</div>
-                <div class="col col-7">
-                  <div class="action-icon">
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-pencil-square"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <!-- end of table-list -->
-              <!-- table-list -->
-              <li class="table-row">
-                <div class="col col-1">01</div>
-                <div class="col col-2">Dipen Shrestha</div>
-                <div class="col col-3">Male</div>
-                <div class="col col-4">Nine</div>
-                <div class="col col-5">A</div>
-                <div class="col col-6">9849160601</div>
-                <div class="col col-7">
-                  <div class="action-icon">
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-pencil-square"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <!-- end of table-list -->
-            </ul>
-            <!-- end of table -->
+                require_once "./database.php";
+                
+                $classListingQuery = 
+                'SELECT
+                 t.student_id, t.class_id, t.years, s.first_name, s.middle_name, s.last_name, s.gender, s.phone, st.section_name
+                FROM
+                 classstudents AS t
+                JOIN
+                  students AS s ON t.student_id = s.id
+                JOIN
+                  sections AS st ON s.section_id = st.id
+                WHERE
+                  t.class_id = ' .  $Selectedclass.';
+                ';
+            
+                $classResult = mysqli_query($conn , $classListingQuery);
+                
+                
+                
 
-            <div class="pagination-container">
-              <div class="pagination">
-                <a href="#">Previous</a>
-                <a href="#" class="active">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">Next</a>
-              </div>
-            </div>
+                while($classRow = mysqli_fetch_assoc($classResult)) {
+                  echo (
+                    '
+                    <li class="table-row">
+                      <div class="col col-1">' . $classRow['student_id'] . '</div>
+                      <div class="col col-2">' . $classRow['first_name'] . ' ' . $classRow['middle_name']. ' '. $classRow['last_name'].' </div>
+                      <div class="col col-3">' . $classRow['gender'] . '</div>
+                      <div class="col col-5">' .$classRow['section_name'] . '</div>
+                      <div class="col col-6">' .$classRow['phone'] . '</div>
+                    </li>
+                    <!-- end of table-list -->
+                    '
+                  );
+                  }
+                }
+                ?>
+          
+        </ul>
+        <!-- end of table -->
+
           </div>
         </div>
       </div>
@@ -1104,22 +1006,18 @@ logout            <svg
 
               <select name="class" id="One">
               <?php 
-                          require "./database.php";
+                require "./database.php";
+                $classQuery = 'SELECT id, grade_name FROM classes';
+                $classResult = mysqli_query($conn , $classQuery);
 
-                          $classQuery = 'SELECT id, grade_name FROM classes';
-                          $classResult = mysqli_query($conn , $classQuery);
-
-                          while($row = mysqli_fetch_assoc($classResult)){
-                          echo("<option value={$row['id']}> {$row['grade_name']} </option>");
-                          }
-
-                          ?>
+                while($row = mysqli_fetch_assoc($classResult)){
+                    echo("<option value={$row['id']}> {$row['grade_name']} </option>");
+                }
+                ?>
               </select>           
               <button type = "submit" name = "submit" value = "filter">               
           </button>
-        
-
-                        </form>
+        </form>
 
             <div class="attendance-head">
               <div>

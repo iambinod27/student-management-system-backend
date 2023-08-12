@@ -11,6 +11,7 @@ main {
   background-color: #0a2342;
   align-items: start;
   height: 100%;
+  max-width: 398px;
 }
 
 .tab h2 {
