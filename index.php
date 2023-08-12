@@ -78,7 +78,7 @@
           </svg>
           Students
         </button>
-        <button class="tablinks" onclick="openCity(event, 'classes')" id="defaultOpen">
+        <button class="tablinks" onclick="openCity(event, 'classes')" >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -95,7 +95,7 @@
           </svg>
           Classes
         </button>
-        <button class="tablinks" onclick="openCity(event, 'teachers')">
+        <button class="tablinks" onclick="openCity(event, 'teachers')" id="defaultOpen">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -873,7 +873,24 @@ logout            <svg
               $teacherSql = "SELECT t.id, u.first_name, u.middle_name, u.last_name, u.gender, u.address, u.phone FROM teachers as t JOIN
               users as u ON t.user_id = u.id;";
               $teacherresult = mysqli_query($conn , $teacherSql);
-            while ($row = mysqli_fetch_assoc($teacherresult)) {
+            
+              
+            if(isset($_POST['deleteTeacher'])) {
+                if(isset($_POST['teacherDelId'])) {
+                    // Establish a database connection ($conn) here
+
+                    $teacherDelId = $_GET['teacherDelId'];
+
+                    $deleteTeacherSQL = "DELETE FROM teachers WHERE id = $teacherDelId";
+                    $deleteTeacherResult = mysqli_query($conn, $deleteTeacherSQL);
+
+                    echo 'delete Successfully';
+                  } else {
+                    echo 'Missing teacherDelId parameter.';
+                  }
+              }
+
+              while ($row = mysqli_fetch_assoc($teacherresult)) {
              echo '<li class="table-row">
               <div class="col col-1">' . $row['id'] . '</div>
               <div class="col col-2">' . $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'] . '</div>
@@ -886,11 +903,11 @@ logout            <svg
                     <div class="teacher-drop-modal-content">
                       <div class="teacher-drop ">
                         <span class="teacherdropclose" onclick="closeTeacherDropModal(' . $row['id'] . ')">&times;</span>
-                        <form method="POST" class="teacher-drop-content">
+                      <form method="POST" class="teacher-drop-content" action="index.php?teacherDelId='. $row['id'] .'">
                          Are you sure? You want to delete
-                          <button class="teacher-drop-btn">
+                          <button class="teacher-drop-btn" name="deleteTeacher" type="submit" >
                            Confirm Delete
-                       </button>
+                          </button>
                      </form>
                     </div>
                    </div>
