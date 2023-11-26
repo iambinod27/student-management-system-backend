@@ -1,5 +1,5 @@
 function openDropModal(id) {
-  let dropModalC = document.getElementById("dropModal-" + id);
+  let dropModalC = document.querySelector("#dropModal-" + id);
   dropModalC.style.display = "block";
 }
 

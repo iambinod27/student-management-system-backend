@@ -1,21 +1,26 @@
 // Get the modal element
-let teachersmodal = document.getElementById("teachers-Modal");
-
-// Get the button that opens the modal
-let teachersbtn = document.getElementById("openTeachersModal");
-
-// Get the <span> element that closes the modal
-let teachersspan = document.getElementsByClassName("teachers-close")[0];
-
+let teachersmodal = document.querySelector("#teachers-Modal");
+let teachersbtn = document.querySelector("#openTeachersModal");
+let teacherModalClose = document.querySelector(".teachers-close");
+console.log(teacherModalClose);
 // When the user clicks on the button, open the modal
-teachersbtn.onclick = function () {
-  teachersmodal.style.display = "block";
-};
+teachersbtn.addEventListener("click",  () => {
+    teachersmodal.style.display = "block";
+});
+// console.log(teachersbtn);
 
 // When the user clicks on <span> (x), close the modal
-teachersspan.onclick = function () {
+// teachersspan.onclick = function () {
+//   teachersmodal.style.display = "none";
+// };
+
+teacherModalClose.addEventListener("click",  () => {
+  console.log(teacherModalClose);
   teachersmodal.style.display = "none";
-};
+
+});
+
+
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {

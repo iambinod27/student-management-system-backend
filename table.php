@@ -1,9 +1,10 @@
-<?php 
+<?php
 
 require_once "database.php";
 
 // Query Function
-function createDbQuery($query) {
+function createDbQuery($query)
+{
     global $conn;
     $result = mysqli_query($conn, $query);
     if (!$result) {
@@ -107,16 +108,14 @@ $classStudent = "CREATE TABLE IF NOT EXISTS classstudents (
     CONSTRAINT fk_classstudents_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE,
     CONSTRAINT fk_classstudents_students FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );";
-  
-  createDbQuery($user);
-  createDbQuery($teacher);
-  createDbQuery($subject);
-  createDbQuery($class);
-  createDbQuery($section);
-  createDbQuery($student);  
-  createDbQuery($attendance);
-  createDbQuery($teacherSubject);
-  createDbQuery($classTeacher);
-  createDbQuery($classStudent);
 
-?>
+createDbQuery($user);
+createDbQuery($teacher);
+createDbQuery($subject);
+createDbQuery($class);
+createDbQuery($section);
+createDbQuery($student);
+createDbQuery($attendance);
+createDbQuery($teacherSubject);
+createDbQuery($classTeacher);
+createDbQuery($classStudent);
