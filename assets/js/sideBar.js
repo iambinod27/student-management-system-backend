@@ -9,4 +9,4 @@ tabLinks.forEach((tabLink,index)=>{
     tabContents[index].classList.add('active');
   })
 })
-// document.getElementById("defaultOpen").click();
+// document.querySelector("#defaultOpen").click();
