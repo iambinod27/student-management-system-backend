@@ -75,12 +75,6 @@ if (!isset($_SESSION['user'])) {
           Teachers
         </span>
       </button>
-      <button class="tablinks">
-        <?php require("assets/svg/attendance.svg") ?>
-        <span class="tablinks-name">
-          Attendance
-        </span>
-      </button>
     </div>
 
     <!-- dashboard -->
@@ -209,9 +203,7 @@ if (!isset($_SESSION['user'])) {
     <?php require_once("pages/teacher.php") ?>
     <!-- teacher end  -->
 
-    <!-- attendance start -->
-    <?php require_once("pages/attendance.php") ?>
-    <!-- attendance end -->
+
 
 
 </body>
