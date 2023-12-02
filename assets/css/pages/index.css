@@ -273,5 +273,49 @@ input[type="number"] {
   justify-content: space-between;
   align-items: end;
 }
+.mySidenavToggler{
+  background-color: transparent;
+  border: none;
+  align-items: left;
+  /* margin-right: 230px; */
+  /* padding-left: 10px; */
+}
+
+
 
 /* End of Teacher */
+.editModalBtn{
+  border: none;
+  background: transparent;
+  
+
+  
+
+}
+
+#dropModelBtn{
+  border: none;
+  background: transparent;
+}
+
+
+.editTeacherModalBtn{
+  border: none;
+  background: transparent;
+
+}
+
+.close{
+  background: transparent;
+  border: none;
+}
+.teachers-close{
+  background: transparent;
+  border: none;
+}
+
+.teacherdropclose{
+  border: none;
+  background: transparent;
+}
+
