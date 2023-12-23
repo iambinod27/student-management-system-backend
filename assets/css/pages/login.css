@@ -2,7 +2,7 @@ main {
   background: #fffffa;
   display: flex;
   align-items: center;
-  min-height: 600px;
+  min-height: 100vh;
 }
 
 .container {

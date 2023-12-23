@@ -164,7 +164,7 @@
             $deleteTeacherSQL = "DELETE FROM teachers WHERE id = $teacherDelId";
             $deleteTeacherResult = mysqli_query($conn, $deleteTeacherSQL);
 
-            echo 'delete Successfully';
+            echo 'Deleted successfully';
           } else {
             echo 'Missing teacherDelId parameter.';
           }

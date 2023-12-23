@@ -56,7 +56,7 @@ if (!isset($_SESSION['user'])) {
           Dashboard
         </span>
       </button>
-      <button class="tablinks">
+      <button class="tablinks ">
         <?php require('assets/svg/student.svg') ?>
 
         <span class="tablinks-name">
@@ -97,9 +97,21 @@ if (!isset($_SESSION['user'])) {
         <button class="add-button" id="openModalBtn">Add +</button>
       </div>
 
-      <div class="form-control">
-        <input type="text" class="form-d-input" placeholder="Search" />
-      </div>
+      <?php
+      if (isset($_POST['Stsubmit'])) {
+        $stFname = $_POST['Stsubmit'];
+
+        $stSQL = "SELECT * FROM `students` WHERE `first_name` LIKE '%stFname'";
+
+        $studentDB = mysqli_insert_id($conn);
+      }
+
+      ?>
+
+      <form class="form-control" method="post" action="index.php">
+        <input type="text" class="form-d-input" placeholder="Search" name="student" id="studentSearch" />
+        <input type="submit" name="Stsubmit" value="Search" class="form-d-button" />
+      </form>
 
 
 
@@ -107,13 +119,20 @@ if (!isset($_SESSION['user'])) {
       <?php
       require "./database.php";
       $query = 'SELECT students.id, students.middle_name, students.last_name, students.gender, students.phone, students.first_name, classes.grade_name, sections.section_name FROM
-            students
-            JOIN
-                classstudents ON students.id = classstudents.student_id
-            JOIN
-                classes ON classstudents.class_id = classes.id
-            JOIN
-                sections ON students.section_id = sections.id; ';
+      students
+      JOIN
+          classstudents ON students.id = classstudents.student_id
+      JOIN
+          classes ON classstudents.class_id = classes.id
+      JOIN
+          sections ON students.section_id = sections.id';
+
+      if (isset($_POST['Stsubmit'])) {
+        $stFname = $_POST['student'];
+
+        $query .= " WHERE students.first_name LIKE '%$stFname%'";
+      }
+
 
       $result = mysqli_query($conn, $query);
 
